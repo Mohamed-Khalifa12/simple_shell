@@ -1,4 +1,11 @@
-# This file lists all individuals having contributed content to the repository.
+FROM alpine:latest
 
-Mohamed Ahmed <mokhalifa238@gmail.com>
-Mohamed Ashraf <dodm773@gmail.com>
+# Set environment variables
+ENV EMAIL_1=mokhalifa238@gmail.com
+ENV NAME_1="Mohamed Ahmed"
+ENV EMAIL_2=dodm773@gmail.com
+ENV NAME_2="Mohamed Ashraf"
+
+# Run your application or desired commands
+CMD echo "Email 1: $EMAIL_1, Name 1: $NAME_1" && \
+    echo "Email 2: $EMAIL_2, Name 2: $NAME_2"
