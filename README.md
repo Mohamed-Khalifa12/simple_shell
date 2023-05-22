@@ -56,5 +56,5 @@ It is created using the **C programming Language** and it can do many functional
 ****
 
 ## TEAM
-Mohamed Ahmed  : [GitHub Account](https://github.com/Mohamed-Khalifa12)\
-Mohamed Ashraf : [GitHub Account](https://github.com/mohamedgika)
+Mohamed Ahmed  : [linkiden](https://www.linkedin.com/in/mohamed-ahmed-94340a26a/)\
+Mohamed Ashraf : [linkedin](https://www.linkedin.com/in/mohamed-ashraf-sobhy-562026222/)
