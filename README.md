@@ -19,7 +19,18 @@ It is created using the **C programming Language** and it can do many functional
 
 ## Files description
  - **AUTHORS** -> List of contributors to this repository
-
+ - **shell.h** -> Header file
+ - **string.c**
+	- **_putchar** -> prints a character
+	- **_puts** -> prints a string
+	- **_strlen** -> gives the length of a string
+	- **_strdup** -> copies a string in a newly allocated memory
+	- **concat_all** -> concatenates 3 strings in a newly allocated memory
+- **line_exec.c**
+	- **splitstring** -> splits a string into an array of words
+	- **execute** -> executes a command using execve
+	- **realloc** -> reallocates a memory block
+	- **freearv** -> frees a 2 dimensional array
 
 ****
 ## List of allowed functions and system calls for this project
