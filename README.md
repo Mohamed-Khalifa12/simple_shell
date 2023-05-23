@@ -16,6 +16,7 @@ It is created using the **C programming Language** and it can do many functional
 > Handles the PATH global variable.\
 > Handles The EOF (End Of File) condition.\
 > Handles the Ctrl + C signal -> It doesn't exit the shell
+****
 
 ## Files description
  - **AUTHORS** -> List of contributors to this repository
@@ -31,6 +32,12 @@ It is created using the **C programming Language** and it can do many functional
 	- **execute** -> executes a command using execve
 	- **realloc** -> reallocates a memory block
 	- **freearv** -> frees a 2 dimensional array
+- **linkpath.c**
+	- **_getenv** -> returns the value of a global variable
+	- **add_node_end** -> adds a node in a singly linked list
+	- **linkpath** -> creates a singly linked list for PATH directories
+	- **_which** -> finds the pathname of a command
+	- **free_list** -> frees the linked list of PATH value
 
 ****
 ## List of allowed functions and system calls for this project
