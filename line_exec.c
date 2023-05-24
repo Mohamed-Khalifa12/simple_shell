@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * splitstring - splits a string and makes it an array of pointers to words
  * @str: the string to be split
@@ -10,12 +11,12 @@
 char **splitstring(char *str, const char *delim)
 {
 	int i, wn;
-	char *value;
-	char *cpy;
 	char **array;
+	char *token;
+	char *copy;
 
-	cpy = malloc(_strlen(str) + 1);
-	if (cpy == NULL)
+	copy = malloc(_strlen(str) + 1);
+	if (copy == NULL)
 	{
 		perror(_getenv("_"));
 		return (NULL);
@@ -23,27 +24,53 @@ char **splitstring(char *str, const char *delim)
 	i = 0;
 	while (str[i])
 	{
-		cpy[i] = str[i];
+		copy[i] = str[i];
 		i++;
 	}
-	cpy[i] = '\0';
+	copy[i] = '\0';
 
-	value = strtok(cpy, delim);
+	token = strtok(copy, delim);
 	array = malloc((sizeof(char *) * 2));
-	array[0] = _strdup(value);
+	array[0] = _strdup(token);
 
-	wn = 3;
 	i = 1;
-	while (value)
+	wn = 3;
+	while (token)
 	{
-		value = strtok(NULL, delim);
+		token = strtok(NULL, delim);
 		array = _realloc(array, (sizeof(char *) * (wn - 1)), (sizeof(char *) * wn));
-		array[i] = _strdup(value);
+		array[i] = _strdup(token);
 		i++;
 		wn++;
 	}
-	free(cpy);
+	free(copy);
 	return (array);
+}
+
+/**
+ * execute - executes a command
+ * @argv: array of arguments
+ */
+
+void execute(char **argv)
+{
+
+	int d, status;
+
+	if (!argv || !argv[0])
+		return;
+	d = fork();
+	if (d == -1)
+	{
+		perror(_getenv("_"));
+	}
+	if (d == 0)
+	{
+		execve(argv[0], argv, environ);
+			perror(argv[0]);
+		exit(EXIT_FAILURE);
+	}
+	wait(&status);
 }
 
 /**
@@ -93,33 +120,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		free(ptr);
 	}
 	return (new);
-}
-
-
-/**
- * execute - executes a command
- * @argv: array of arguments
- */
-
-void execute(char **argv)
-{
-
-	int d, status;
-
-	if (!argv || !argv[0])
-		return;
-	d = fork();
-	if (d == -1)
-	{
-		perror(_getenv("_"));
-	}
-	if (d == 0)
-	{
-		execve(argv[0], argv, environ);
-			perror(argv[0]);
-		exit(EXIT_FAILURE);
-	}
-	wait(&status);
 }
 
 /**

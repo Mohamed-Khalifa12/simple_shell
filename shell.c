@@ -39,7 +39,6 @@ void _isatty(void)
 	if (isatty(STDIN_FILENO))
 		_puts("#cisfun$ ");
 }
-
 /**
  * main - Shell
  * Return: 0 on success
