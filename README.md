@@ -27,7 +27,7 @@ It is created using the **C programming Language** and it can do many functional
 	- **_strlen** -> gives the length of a string
 	- **_strdup** -> copies a string in a newly allocated memory
 	- **concat_all** -> concatenates 3 strings in a newly allocated memory
-- **line_exec.c**
+- **lineExec.c**
 	- **splitstring** -> splits a string into an array of words
 	- **execute** -> executes a command using execve
 	- **realloc** -> reallocates a memory block
@@ -38,6 +38,19 @@ It is created using the **C programming Language** and it can do many functional
 	- **linkpath** -> creates a singly linked list for PATH directories
 	- **_which** -> finds the pathname of a command
 	- **free_list** -> frees the linked list of PATH value
+ - **buildinFun.c**
+	- **exitt** -> handles the exit buildin command
+	- **_atoi** -> converts a string into an integer
+	- **env** -> prints the current environment
+	- **_setenv** -> Initialize a new global variable, or modify an existing one
+	- **_unsetenv** -> remove a global variable
+ - **checkbuild.c**
+	- **checkbuildin** -> checks if a command is a build-in command
+- **signal.c**
+	- **sig_handler** -> checks if Ctrl C is pressed
+	- **_EOF** -> handles the End of File
+	- **_isatty** -> check if the input comes from a terminal or not.
+- **shell.c** -> it has the main file.
 
 ****
 ## List of allowed functions and system calls for this project
