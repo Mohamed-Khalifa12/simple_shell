@@ -1,8 +1,9 @@
 #include "shell.h"
+
 /**
- * path_cmd -  Search In $PATH for executable command
- * @cmd: Parsed input
- * Return: 0 on success or  1 on failure  0
+ * path_cmd -  Search In $PATH For Excutable Command
+ * @cmd: Parsed Input
+ * Return: 1  Failure  0  Success.
  */
 int path_cmd(char **cmd)
 {
@@ -25,14 +26,15 @@ int path_cmd(char **cmd)
 		value = _strtok(NULL, ":");
 	}
 	free(path);
-	free(value);
+
 	return (1);
 }
 /**
- * build - Build command
- * @token: Executable command
- * @value: Directory conatining Command
- * Return: Parsed full path of command or NULL if failed
+ * build - Build Command
+ * @token: Excutable Command
+ * @value: Dirctory Conatining Command
+ *
+ * Return: Parsed Full Path Of Command Or NULL Case Failed
  */
 char *build(char *token, char *value)
 {
@@ -43,7 +45,6 @@ char *build(char *token, char *value)
 	cmd = malloc(sizeof(char) * len);
 	if (cmd == NULL)
 	{
-		free(cmd);
 		return (NULL);
 	}
 
@@ -56,23 +57,23 @@ char *build(char *token, char *value)
 	return (cmd);
 }
 /**
- * _getenv - Gets the value of environment variable by name
- * @name: Environment variable name
- * Return: The value of the environment variable or NULL if failed
+ * _getenv - Gets The Value Of Enviroment Variable By Name
+ * @name: Environment Variable Name
+ * Return: The Value of the Environment Variable Else NULL.
  */
 char *_getenv(char *name)
 {
-	size_t name_len, value_len;
+	size_t nl, vl;
 	char *value;
-	int i, j, k;
+	int i, x, j;
 
-	name_len = _strlen(name);
+	nl = _strlen(name);
 	for (i = 0 ; environ[i]; i++)
 	{
-		if (_strncmp(name, environ[i], name_len) == 0)
+		if (_strncmp(name, environ[i], nl) == 0)
 		{
-			value_len = _strlen(environ[i]) - name_len;
-			value = malloc(sizeof(char) * value_len);
+			vl = _strlen(environ[i]) - nl;
+			value = malloc(sizeof(char) * vl);
 			if (!value)
 			{
 				free(value);
@@ -81,14 +82,15 @@ char *_getenv(char *name)
 			}
 
 			j = 0;
-			for (k = name_len + 1; environ[i][k]; k++, j++)
+			for (x = nl + 1; environ[i][x]; x++, j++)
 			{
-				value[j] = environ[i][k];
+				value[j] = environ[i][x];
 			}
 			value[j] = '\0';
 
 			return (value);
 		}
 	}
+
 	return (NULL);
 }

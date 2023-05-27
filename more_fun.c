@@ -1,27 +1,28 @@
 #include "shell.h"
 /**
- * _strcpy - function that copies a string
- * @dest: destination
- * @src: source
- * Return: destination
+ * _strcpy - Copie Source To Destination Char
+ * @dest:Destination
+ * @src:Source
+ * Return: Copie Of Char *
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+int i;
 
+i = 0;
 	while (src[i])
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+dest[i] = '\0';
+return (dest);
 }
 /**
- * _strcat - function that concatenates two strings
- * @dest: first string
- * @src: second string
- * Return: first string + second string
+ * _strcat - Concat Two String
+ * @dest:First String
+ * @src:Second String
+ * Return:First String + Second String Char *
  */
 char *_strcat(char *dest, char *src)
 {
@@ -42,27 +43,31 @@ char *_strcat(char *dest, char *src)
 	return (s);
 }
 /**
- * _strchr - function that locates character in a string
- * @s: string to be searched
- * @c: character to be located
- * Return: pointer to character
+ * _strchr - Locate Charactere In String
+ * @s:String Search In
+ * @c:Char To Search For
+ * Return: Pointer To Char*
  */
 char *_strchr(char *s, char c)
 {
-	do {
+
+	do		{
+
 		if (*s == c)
-		{
+			{
 			break;
-		}
-	} while (*s++);
-	return (s);
+			}
+		}	while (*s++);
+
+return (s);
 }
 /**
- * _strncmp - function that compares n amount of characters of two strings
- * @s1: first string
- * @s2: second string
- * @n: amount of characters to compare
- * Return: 1 if the strings don't match otherwise 0
+ * _strncmp - Compare Amount (n) Of Characters Of Two Strings.
+ * @s1: A String.
+ * @s2: A String.
+ * @n: Amount Of Characters To Compare.
+ *
+ * Return: 1 If The Strings Don't Match Otherwise 0
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -70,7 +75,6 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 
 	if (s1 == NULL)
 		return (-1);
-
 	for (i = 0; i < n && s2[i]; i++)
 	{
 		if (s1[i] != s2[i])
@@ -81,9 +85,9 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 /**
- * _strdup - duplicate a string
- * @str: string
- * Return: duplicated string or Null if failed
+ * _strdup - Duplicate A String
+ * @str:String
+ * Return: Duplicate String Failed Null
  */
 char *_strdup(char *str)
 {
@@ -96,9 +100,11 @@ char *_strdup(char *str)
 	{
 		return (NULL);
 	}
+
 	for (i = 0; i <= len; i++)
 	{
 		str2[i] = str[i];
 	}
+
 	return (str2);
 }

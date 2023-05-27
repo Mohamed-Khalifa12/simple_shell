@@ -1,13 +1,17 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef _SHELL_H_
+#define _SHELL_H_
 
-/***** MACROS *****/
+/**###### environ var ######*/
 
-#define PRINT(c) (write(STDERR_FILENO, c, _strlen(c)))
-#define BUFSIZE 10240
-#define DELIMITER " \t\r\n\a"
+extern char **environ;
 
-/*** STANDARD LIBRARIES ***/
+/**##### MACROS ######*/
+
+#define BUFSIZE 1024
+#define DELIM " \t\r\n\a"
+#define PRINTER(c) (write(STDOUT_FILENO, c, _strlen(c)))
+
+/**###### LIBS USED ######*/
 
 #include <stdio.h>
 #include <unistd.h>
@@ -21,8 +25,14 @@
 #include <errno.h>
 #include <linux/limits.h>
 
-/******** STRING HANDLER FUNCTIONS **********/
 
+
+
+
+/**###### STRING FUNCTION ######*/
+
+char *_strtok(char *str, const char *tok);
+unsigned int check_delim(char c, const char *str);
 char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
 int _putchar(char c);
@@ -39,7 +49,7 @@ char *_strchr(char *s, char c);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strdup(char *str);
 
-/*********** MEMORY HANDLERS ***********/
+/**###### MEMORIE  MANGMENT ####*/
 
 void free_env(char **env);
 void *fill_an_array(void *a, int el, unsigned int len);
@@ -48,95 +58,55 @@ void *_calloc(unsigned int size);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void free_all(char **input, char *line);
 
-/****** MISCELLANEOUS AND INPUT FUNCTIONS *******/
+/**###### INPUT Function ######*/
 
-char *_getline();
-char *space(char *str);
-char *enter(char *string);
-void hashtag_handler(char *buff);
 void prompt(void);
-unsigned int check_delim(char c, const char *str);
-char *_strtok(char *str, const char *delim);
-int history(char *input);
-char **separator(char *input);
+void signal_to_handel(int sig);
+char *_getline(void);
 
-/****** FILE ARGUMENT HANDLER FUNCTIONS ******/
+/** ###### Command parser and extractor ###*/
 
-void read_file(char *file, char **argv);
-void treat_file(char *line, int count, FILE *fp, char **argv);
+int path_cmd(char **line);
+char *_getenv(char *name);
+char **parse_cmd(char *cmd);
+int handle_builtin(char **cmd, int er);
+void read_file(char *filename, char **argv);
+char *build(char *token, char *value);
+int check_builtin(char **cmd);
+void creat_envi(char **envi);
+int check_cmd(char **tokens, char *line, int count, char **argv);
+void treat_file(char *line, int counter, FILE *fd, char **argv);
 void exit_bul_for_file(char **cmd, char *line, FILE *fd);
 
-/****** PARSED ARGUMENT HANDLER FUNCTIONS *****/
+/** ####BUL FUNC #####*/
 
-char **parse_cmd(char *input);
-int handle_builtin(char **cmd, int er);
-int check_cmd(char **cmd, char *input, int c, char **argv);
-void signal_to_handle(int sig);
-
-/******* ERROR HANDLERS ******/
-
-void print_error(char *input, int counter, char **argv);
-void _prerror(char **argv, int c, char **cmd);
-void error_file(char **argv, int c);
-
-/****** ENVIRONMENT HANDLERS ******/
-
-extern char **environ;
-void create_envi(char **envi);
-void free_env(char **env);
-
-/****** PRINTING FUNCTIONS *****/
-
-void print_number(unsigned int n);
-void print_number_int(int n);
+void hashtag_handle(char *buff);
+int history(char *input);
+int history_dis(char **cmd, int er);
+int dis_env(char **cmd, int er);
+int change_dir(char **cmd, int er);
+int display_help(char **cmd, int er);
+int echo_bul(char **cmd, int er);
+void  exit_bul(char **cmd, char *input, char **argv, int c);
 int print_echo(char **cmd);
 
-/******* PATH FINDER *******/
+/** ####error handle and Printer ####*/
+void print_number(unsigned int n);
+void print_number_in(int n);
+void print_error(char *line, int c, char **argv);
+void _prerror(char **argv, int c, char **cmd);
 
-int path_cmd(char **cmd);
-char *build(char *token, char *value);
-char *_getenv(char *name);
-
-/******* HELP HANDLERS *******/
-
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_history(void);
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
-int display_help(char **cmd, __attribute__((unused))int st);
-
-/****** BUILTIN COMMAND HANDLERS AND EXECUTE ******/
-
-int check_builtin(char **cmd);
-int handle_builtin(char **cmd, int st);
-void exit_bul(char **cmd, char *input, char **argv, int c,
-		int stat);
-int change_dir(char **cmd, __attribute__((unused))int st);
-int dis_env(__attribute__((unused)) char **cmd,
-		__attribute__((unused)) int st);
-int echo_bul(char **cmd, int st);
-int history_dis(__attribute__((unused))char **c,
-		__attribute__((unused)) int st);
-
-/****** BUILT-IN COMMANDS STRUCT *****/
 
 /**
- * struct _builtin - Defines a struct that conatins built-in commands
- * with their respective implementation functions
- * @command: - Built-in command
- * @function: - Pointer to custom functions that have
- * similar functionalities as the built-in commands
+ * struct bulltin - contain bultin to handle and function to excute
+ * @command:pointer to char
+ * @fun:fun to excute when bultin true
  */
-typedef struct _builtin
+
+typedef struct  bulltin
 {
 	char *command;
-	int (*function)(char **line, int st);
-} builtin;
-
+	int (*fun)(char **line, int er);
+} bul_t;
 
 #endif

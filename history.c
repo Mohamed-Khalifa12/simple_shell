@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
- * history - write file with user inputs
- * @input: user input
- * Return: 0 on success -1 if failed
+ * history - Fill File By User Input
+ * @input: User Input
+ * Return: -1 Fail 0 Succes
  */
 int history(char *input)
 {
@@ -24,4 +24,18 @@ int history(char *input)
 			return (-1);
 	}
 	return (1);
+}
+/**
+ * free_env - Free Enviroment Variable Array
+ * @env:  Environment variables.
+ * Return: Void
+ */
+void free_env(char **env)
+{
+	int i;
+
+	for (i = 0; env[i]; i++)
+	{
+		free(env[i]);
+	}
 }
